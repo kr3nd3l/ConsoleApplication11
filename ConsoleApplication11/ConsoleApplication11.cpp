@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <vector>
 
 int reverseNumber(int num, int reversed = 0) {
    
@@ -29,6 +30,24 @@ int ackermann(int m, int n) {
         return ackermann(m - 1, ackermann(m, n - 1));
     }
 }
+std::pair<int, int> recursiveSearch(const std::vector<std::vector<int>>& matrix, int target, int row, int col) {
+    // Проверка границ
+    if (row >= matrix.size()) {
+        return { -1, -1 }; // Элемент не найден
+    }
+    if (col >= matrix[row].size()) {
+        return recursiveSearch(matrix, target, row + 1, 0); // Переход на следующую строку
+    }
+
+    // Проверка текущего элемента
+    if (matrix[row][col] == target) {
+        return { row, col }; // Элемент найден
+    }
+
+    // Рекурсивный вызов для следующего элемента
+    return recursiveSearch(matrix, target, row, col + 1);
+}
+
 
 int main() {
     int number;
@@ -56,6 +75,23 @@ int main() {
     int m = 3; // Пример: значение m
     int n = 4; // Пример: значение n
     std::cout << "A(" << m << ", " << n << ") = " << ackermann(m, n) << std::endl;
+    return 0;
+    std::vector<std::vector<int>> matrix = {
+      {1, 2, 3},
+      {4, 5, 6},
+      {7, 8, 9}
+    };
+
+    int target = 5; // Число для поиска
+    auto result = recursiveSearch(matrix, target, 0, 0);
+
+    if (result.first != -1) {
+        std::cout << "Элемент найден на индексе: (" << result.first << ", " << result.second << ")n";
+    }
+    else {
+        std::cout << "Элемент не найден.n";
+    }
+
     return 0;
 }
 
