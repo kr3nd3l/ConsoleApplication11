@@ -1,38 +1,13 @@
 ﻿#include <iostream>
 
-int reverseNumber(int num, int reversed = 0) {
-   
-    if (num == 0) {
-        return reversed;
-    }
-
-    
-    reversed = reversed * 10 + num % 10;
-
-    
-    return reverseNumber(num / 10, reversed);
+int fibonacci(int n) {
+    if (n <= 0) return 0;
+    else if (n == 1) return 1;
+    else return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
 int main() {
-    int number;
-
-    std::cout << "enter number: ";
-    std::cin >> number;
-
-    
-    bool isNegative = number < 0;
-    if (isNegative) {
-        number = -number;
-    }
-
-    int reversedNumber = reverseNumber(number);
-
-   
-    if (isNegative) {
-        reversedNumber = -reversedNumber;
-    }
-
-    std::cout << "reverse number: " << reversedNumber << std::endl;
-
+    int n = 10; 
+    std::cout << "num fib for " << n << ": " << fibonacci(n) << std::endl;
     return 0;
 }
